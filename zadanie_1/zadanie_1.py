@@ -13,7 +13,14 @@ ages = [20, 28, 26, 24]
 # kolekcje nie są równe. W przeciwnym (domyślnym) wypadku funkcja zwróci iterator kolekcji o długości najkrótszej
 # kolekcji wejściowej.
 #
-# Podniesiony wyjątek to `ValueError` -
+# Podniesiony wyjątek to `ValueError` - https://docs.python.org/3.12/library/exceptions.html#ValueError
+# Jest to wyjątek który ma zostać podniesiony w sytuacji gdy zmienna ma prawidłowy typ - lecz nieprawidłową
+# względem implementacji wartość, a nie ma bardziej dokładnego błędu opisującego tą sytuację.
+#
+# Dokumentacja podaje przykład `IndexError` - gdy operujemy na elemencie listy, pod którym nie ma wartości
+# typ jest prawidłowy - integer, jednak wartość nie jest ponieważ an tym indeksie nie ma żadnej wartości.
+# Jest to ValueError, chociaż w takim przypadku istnieje bardziej dokładny IndexError który powinien zostać
+# wykorzystany.
 
 names_with_ages = list(zip(names, ages, strict=True))
 print(names_with_ages)
