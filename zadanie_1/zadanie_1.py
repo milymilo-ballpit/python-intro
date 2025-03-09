@@ -12,10 +12,22 @@ ages = [20, 28, 26, 24]
 # `zip()` przyjmuje również keyword argument `strict` - boolean, który spowoduje zwrócenie wyjątku jeżeli
 # kolekcje nie są równe. W przeciwnym (domyślnym) wypadku funkcja zwróci iterator kolekcji o długości najkrótszej
 # kolekcji wejściowej.
+#
+# Podniesiony wyjątek to `ValueError` -
 
 names_with_ages = list(zip(names, ages, strict=True))
 print(names_with_ages)
 
+# https://docs.python.org/3.12/library/random.html
+# Moduł random implementuje fukcjonalność związaną z szerokopojetą losowością.
+# Znajdziemy tutaj funkcje pozwalające generować różne losowe typy danych, oraz manipulować
+# istniejącymi danymi wykorzystując losowość.
+#
+# Co ważne, random nie jest losowy tylko pseudo-losowy. Korzysta z PRNG wykorzystującego seed
+# (domyślnie os.urandom) i nie powinien być wykorzystywany do bezpiecznego losowania danych tak jak
+# np. przy hasłach. Losowość w module random jest całkowicie oparta na wartości seeda i może zostać
+# odtworzona.
+#
 # https://docs.python.org/3.12/library/random.html#random.sample
 # https://docs.python.org/3.12/library/random.html#random.randint
 #
