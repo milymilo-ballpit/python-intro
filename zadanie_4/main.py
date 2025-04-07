@@ -11,13 +11,15 @@ from pymcdm.normalizations import minmax_normalization
 # - Czas pracy na baterii (h),
 # - Waga (kg)
 
-decision_matrix = np.array([
-    [3000, 4500, 8, 1.5], # Model A
-    [3500, 5000, 6, 2.1], # Model B
-    [2800, 4300, 10, 1.6], # Model C
-    [3200, 4800, 9, 1.7], # Model D
-    [3100, 4600, 7, 1.4] # Model E
-])
+decision_matrix = np.array(
+    [
+        [3000, 4500, 8, 1.5],  # Model A
+        [3500, 5000, 6, 2.1],  # Model B
+        [2800, 4300, 10, 1.6],  # Model C
+        [3200, 4800, 9, 1.7],  # Model D
+        [3100, 4600, 7, 1.4],  # Model E
+    ]
+)
 
 # Istotność (waga) parametrów:
 # - cena jest najważniejszym kryterium (40%)
@@ -36,7 +38,9 @@ types = np.array([-1, 1, 1, -1])
 # kosztem (dążymy do minimalizacji) czy korzyścią (dążymy do maksymalizacji)
 normalized_matrix = np.zeros(decision_matrix.shape)
 for i in range(decision_matrix.shape[1]):
-    normalized_matrix[:, i] = minmax_normalization(decision_matrix[:, [i]], cost=(types[i] == -1)).flatten()
+    normalized_matrix[:, i] = minmax_normalization(
+        decision_matrix[:, [i]], cost=(types[i] == -1)
+    ).flatten()
 
 # TOPSIS
 topsis = TOPSIS()
@@ -47,11 +51,13 @@ bounds = np.vstack((decision_matrix.min(axis=0), decision_matrix.max(axis=0))).T
 spotis = SPOTIS(bounds=bounds)
 spotis_ranking = spotis(decision_matrix, weights, types)
 
-results_df = pd.DataFrame({
-    'Laptop': ['Model A', 'Model B', 'Model C', 'Model D', 'Model E'],
-    'TOPSIS': topsis_ranking,
-    'SPOTIS': spotis_ranking
-})
+results_df = pd.DataFrame(
+    {
+        "Laptop": ["Model A", "Model B", "Model C", "Model D", "Model E"],
+        "TOPSIS": topsis_ranking,
+        "SPOTIS": spotis_ranking,
+    }
+)
 
 # Wyświetlamy wyniki posortowane po TOPSIS malejąco (od najlepszych)
-print(results_df.sort_values(by='TOPSIS', ascending=False))
+print(results_df.sort_values(by="TOPSIS", ascending=False))
